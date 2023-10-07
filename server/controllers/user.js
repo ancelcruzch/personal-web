@@ -1,4 +1,6 @@
+const bcrypt = require("bcryptjs");
 const User = require("../models/user");
+const { use } = require("../router/auth");
 
 async function getMe(req, res){
     const {user_id} = req.user;
@@ -25,7 +27,33 @@ async function getUsers(req, res){
     res.status(200).send(response);
 }
 
+async function createUser(req, res){
+    const {password} = req.body;
+    const user = new User({
+        ...req.body,
+        active: false,
+    });
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashPassword = bcrypt.hashSync(password,salt);
+    user.password = hashPassword;
+
+    //Procesar Imagen incomplete
+    if(req.files.avatar){
+        console.log("Procesar Avatar");
+    }
+
+    user.save((error, userStored) => {
+        if(error){
+            res.status(400).send({msg: "Error en crear el usuario"});
+        }else {
+            res.status(201).send(userStored);
+        }
+    });
+}
+
 module.exports = {
     getMe,
     getUsers,
+    createUser,
 };
