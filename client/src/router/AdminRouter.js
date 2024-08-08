@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import {AdminLayout} from '../layouts';
 import {Auth, Users, Blog, Courses, Menu, Newsletter} from '../pages/admin'
 
-const user = {email: "alaincruz@example.com"};
+const user = null; //{email: "alaincruz@example.com"};
 
 export function AdminRouter() {
   const loadLayout = (Layout, Page) => {
@@ -18,14 +18,14 @@ export function AdminRouter() {
     <Routes>
       {!user ? (
         // Ruta protegida: Si el usuario no está autenticado, muestra la página de autenticación
-        <Route path="/admin/*" element={loadLayout(AdminLayout, Auth)} />
+        <Route path="/admin/*" element={<Auth/>} />
       ) : (
         <>
           {["/admin", "/admin/blog"].map((path) => (
             <Route
               key={path}
               path={path}  
-              element={loadLayout(AdminLayout,Blog)}
+              element={loadLayout(AdminLayout, Blog)}
             />
           ))}
           {/* Ruta de usuarios accesible solo para usuarios autenticados */}

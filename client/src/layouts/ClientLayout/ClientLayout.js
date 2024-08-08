@@ -4,7 +4,7 @@ export function ClientLayout(props) {
     const {children} = props;
     return (
         <div>
-            <h2>Se esta cargando el ClientLayout</h2>x
+            <h2>Se esta cargando el ClientLayout</h2>
             {children}
         </div>
     )
