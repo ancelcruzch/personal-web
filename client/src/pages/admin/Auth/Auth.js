@@ -1,6 +1,6 @@
 import React , {useState} from "react";
 import { MenuItem, Tab } from "semantic-ui-react";
-import {RegisterForm} from "../../../components/Admin/Auth/";
+import {RegisterForm, LoginForm} from "../../../components/Admin/Auth/";
 import {Icon} from "../../../assets"
 import "./Auth.scss";
 import { render } from "@testing-library/react";
@@ -15,7 +15,7 @@ export function Auth(){
           menuItem: "Entrar",
           render: () => (
             <Tab.Pane>
-              <h2>Login Form</h2>
+              <LoginForm />
             </Tab.Pane>
           ),
         },
