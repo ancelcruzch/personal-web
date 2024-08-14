@@ -1,19 +1,22 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import {AdminLayout} from '../layouts';
-import {Auth, Users, Blog, Courses, Menu, Newsletter} from '../pages/admin'
+import {Auth, Users, Blog, Courses, Menu, Newsletter} from '../pages/admin';
+import {useAuth} from "../hooks";
 
-const user = null; //{email: "alaincruz@example.com"};
+// const user = null; //{email: "alaincruz@example.com"};
 
 export function AdminRouter() {
+  const { user } = useAuth();
+
   const loadLayout = (Layout, Page) => {
     return (
       <Layout>
-        <Page/>
+        <Page />
       </Layout>
     );
   };
-
+  
   return (
     <Routes>
       {!user ? (
